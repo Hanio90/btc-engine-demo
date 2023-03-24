@@ -3,5 +3,5 @@ export function formatNumberWithCommas(num: number): string {
 }
 
 export function formatPrice(price: number): string {
-    return ` USD ${formatNumberWithCommas(price)}`;
+    return `${formatNumberWithCommas(price)}`;
 }

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Box, Typography, TextField, Button } from '@mui/material';
-import {formatPrice} from '../util/util'
-import {useBtcAddressInfo} from '../hooks/useBtcAddressInfo'
+import { formatPrice } from '../util/util'
+import { useBtcAddressInfo } from '../hooks/useBtcAddressInfo'
 
 interface BtcAddressInfoProps { }
 
@@ -39,7 +39,7 @@ export const BtcAddressInfo = (props: BtcAddressInfoProps) => {
         );
     }
 
-    const { balance, n_tx, total_received,address, total_sent } = btcAddressInfo;
+    const { balance, n_tx, total_received, address, total_sent, txs } = btcAddressInfo;
 
     return (
         <Box sx={{ p: 2 }}>
@@ -61,15 +61,50 @@ export const BtcAddressInfo = (props: BtcAddressInfoProps) => {
             <Typography variant="body1" gutterBottom>
                 Total spent: {total_sent}
             </Typography>
-            Total Unspent: {total_received - total_sent}
+            Total Unspent: {formatPrice(total_received - total_sent)}
             //TODO: NEED TO PROVIDE UNSPENT DATA
             <Typography variant="body1" gutterBottom>
                 Balance: {formatPrice(balance)}
             </Typography>
             <Typography variant="h5" gutterBottom>
-                BTC Transaction Search Info
+                BTC Transactions Info
             </Typography>
-            DISPLAY TRANSACTION DATA
+            {txs.map((data, index) => {
+                return (
+                    <Box sx={{
+                        mb: '50px'
+                    }}>
+                        <Typography variant="body1" gutterBottom>
+                            Transaction #: {index + 1}
+                        </Typography>
+                        <Typography variant="body1" gutterBottom>
+                            Transaction Hash: {data.hash}
+                        </Typography>
+                        <Typography variant="body1" gutterBottom>
+                            Received Time: {data.received}
+                        </Typography>
+                        <Typography variant="body1" gutterBottom>
+                            Status: {data.status}
+                        </Typography>
+                        Size in bytes: {data.size}
+                        <Typography variant="body1" gutterBottom>
+                            Confirmations: {data.confirmations}
+                        </Typography>
+                        <Typography variant="body1" gutterBottom>
+                            NEED TO FIX
+                            Total Btc Input: {data.inputs.length}
+                        </Typography>
+                        <Typography variant="body1" gutterBottom>
+                        NEED TO FIX
+                        Total Btc Output: {data.outputs.length}
+                        </Typography>
+                        <Typography variant="body1" gutterBottom>
+                           Total Fees: {formatPrice(data.fees)}
+                        </Typography>
+                    </Box>
+                )
+            }
+            )}
         </Box>
     );
 };
