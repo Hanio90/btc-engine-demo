@@ -139,21 +139,21 @@ export const DisplayDataInCurrencyFormat = (data: { btcAddressData: BtcAddressIn
                             {currency === 'USD' &&
 
                                 <Typography variant="body1" gutterBottom>
-                                    Total Fees: {data.fees}
+                                    Total Fees: {formatPriceData(data.fees * 0.0002740161855743607, currency)}
                                 </Typography>
 
                             }
                             {currency === 'EUR' &&
 
                                 <Typography variant="body1" gutterBottom>
-                                    Total Fees: {data.fees}
+                                    Total Fees: {formatPriceData(data.fees * 0.0002541785098035193, currency)}
                                 </Typography>
 
                             }
                             {currency === 'BTC' &&
 
                                 <Typography variant="body1" gutterBottom>
-                                    Total Fees: {data.fees}
+                                    Total Fees: {data.fees * 0.0002740161855743607 / btcPriceInfo.usd}
                                 </Typography>
 
                             }
