@@ -55,53 +55,52 @@ export const DisplayDataInCurrencyFormat = (data: { btcAddressData: BtcAddressIn
                 Confirmed Transactions: {n_tx}
             </Typography>
             {currency === 'USD' &&
-             <div>
-                <Typography variant="body1" gutterBottom>
-                    Total received: {formatPriceData((total_received * 0.0002740161855743607) / btcPriceInfo.usd, currency)}
-                </Typography>
-                 <Typography variant="body1" gutterBottom>
-                 Total spent:  {formatPriceData((total_sent * 0.0002740161855743607) / btcPriceInfo.usd, currency)}
-             </Typography>
-             <Typography variant="body1" gutterBottom>
-                    Total Unspent: {formatPriceData((total_received - total_sent) * 0.000000009892 / btcPriceInfo.usd, currency)}
-                </Typography>
-                <Typography variant="body1" gutterBottom>
-                Balance: {formatPriceData(balance * 0.002740161855743607, currency)}
-            </Typography>
-             </div>
+                <div>
+                    <Typography variant="body1" gutterBottom>
+                        Total received: {formatPriceData((total_received * 0.0002740161855743607), currency)}
+                    </Typography>
+                    <Typography variant="body1" gutterBottom>
+                        Total spent:  {formatPriceData((total_sent * 0.0002740161855743607), currency)}
+                    </Typography>
+                    <Typography variant="body1" gutterBottom>
+                        Total Unspent: {formatPriceData((total_received - total_sent) * 0.0002740161855743607, currency)}
+                    </Typography>
+                    <Typography variant="body1" gutterBottom>
+                        Balance: {formatPriceData(balance * 0.0002740161855743607, currency)}
+                    </Typography>
+                </div>
             }
             {currency === 'EUR' &&
-            <div>
-                <Typography variant="body1" gutterBottom>
-                    Total received: {formatPriceData((total_received * 0.0002541785098035193)  / btcPriceInfo.eur, currency)}
-                </Typography>
-                  <Typography variant="body1" gutterBottom>
-                  Total spent: {formatPriceData((total_sent * 0.0002541785098035193)  / btcPriceInfo.eur, currency)}
-              </Typography>
-              <Typography variant="body1" gutterBottom>
-                    Total Unspent: {formatPriceData((total_received - total_sent) * 0.00000001 / btcPriceInfo.eur, currency)}
-                </Typography>
-                <Typography variant="body1" gutterBottom>
-                Balance: {formatPriceData(balance * 0.0002541785098035193, currency)}
-            </Typography>
-              </div>
+                <div>
+                    <Typography variant="body1" gutterBottom>
+                        Total received: {formatPriceData((total_received * 0.0002541785098035193) , currency)}
+                    </Typography>
+                    <Typography variant="body1" gutterBottom>
+                        Total spent: {formatPriceData((total_sent * 0.0002541785098035193), currency)}
+                    </Typography>
+                    <Typography variant="body1" gutterBottom>
+                        Total Unspent: {formatPriceData((total_received - total_sent) * 0.0002541785098035193 , currency)}
+                    </Typography>
+                    <Typography variant="body1" gutterBottom>
+                        Balance: {formatPriceData(balance * 0.0002541785098035193, currency)}
+                    </Typography>
+                </div>
             }
-
             {currency === 'BTC' &&
-            <div>
-                <Typography variant="body1" gutterBottom>
-                    Total received: BTC {(total_received * 0.00000001) / btcPriceInfo.usd}
-                </Typography>
-                   <Typography variant="body1" gutterBottom>
-                   Total spent: BTC {(total_sent * 0.00000001) / btcPriceInfo.usd}
-               </Typography>
-               <Typography variant="body1" gutterBottom>
-                    Total Unspent: {(total_received - total_sent) * 0.00000001 / btcPriceInfo.usd}
-                </Typography>
-                <Typography variant="body1" gutterBottom>
-                Balance: {formatPriceData(balance * 0.00000001, currency)}
-            </Typography>
-               </div>
+                <div>
+                    <Typography variant="body1" gutterBottom>
+                        Total received: BTC {((total_received * 0.0002740161855743607))  / btcPriceInfo.usd}
+                    </Typography>
+                    <Typography variant="body1" gutterBottom>
+                        Total spent: BTC {(total_sent * 0.0002740161855743607)  / btcPriceInfo.usd}
+                    </Typography>
+                    <Typography variant="body1" gutterBottom>
+                        Total Unspent: {((total_received* 0.0002740161855743607 )- (total_sent * 0.0002740161855743607 ))  / btcPriceInfo.usd}
+                    </Typography>
+                    <Typography variant="body1" gutterBottom>
+                        Balance: {formatPriceData((balance * 0.0002740161855743607) / btcPriceInfo.usd , currency)}
+                    </Typography>
+                </div>
             }
             <Typography variant="h5" gutterBottom>
                 BTC Transactions Info
@@ -137,9 +136,28 @@ export const DisplayDataInCurrencyFormat = (data: { btcAddressData: BtcAddressIn
 
                                 Total Btc Output: {data.outputs.length}
                             </Typography>
-                            <Typography variant="body1" gutterBottom>
-                                Total Fees: {data.fees}
-                            </Typography>
+                            {currency === 'USD' &&
+
+                                <Typography variant="body1" gutterBottom>
+                                    Total Fees: {data.fees}
+                                </Typography>
+
+                            }
+                            {currency === 'EUR' &&
+
+                                <Typography variant="body1" gutterBottom>
+                                    Total Fees: {data.fees}
+                                </Typography>
+
+                            }
+                            {currency === 'BTC' &&
+
+                                <Typography variant="body1" gutterBottom>
+                                    Total Fees: {data.fees}
+                                </Typography>
+
+                            }
+
                             <Button sx={{
                                 background: 'blue',
                                 height: '50px',
