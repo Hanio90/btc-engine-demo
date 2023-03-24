@@ -1,17 +1,21 @@
-import { useState } from 'react';
-import { Box, Typography, TextField, Button } from '@mui/material';
+
+import { Box, Typography, Button } from '@mui/material';
 import { formatPrice } from '../util/util'
-import { BtcAddressInfoInterface, useBtcAddressInfo } from '../hooks/useBtcAddressInfo'
+import { useBtcAddressInfo } from '../hooks/useBtcAddressInfo'
 import { getUpdates } from '@/hooks/useGetUpdatedEvents';
+import ButtonGroup from '@mui/material/ButtonGroup';
+import { useBtcPriceInfo } from '@/util/converter';
 
 export const BtcAddressInfo = (address: { address1: string }) => {
     const apiUrl = `https://api.blockcypher.com/v1/btc/main/addrs/${address.address1}/full`;
     const { btcAddressInfo, isLoading, error } = useBtcAddressInfo({ apiUrl });
- 
-    const handleOnclick = (waletAddress:any, hash:any)=>{
+
+    const test = useBtcPriceInfo();
+    console.log('testing', test)
+    const handleOnclick = (waletAddress: any, hash: any) => {
         console.log('testing');
         const test = getUpdates(waletAddress, hash)
-        console.log('testing',test);
+        console.log('testing', test);
     }
 
     console.log('error', error);
@@ -29,10 +33,17 @@ export const BtcAddressInfo = (address: { address1: string }) => {
         );
     }
 
-    const { balance, n_tx, total_received, total_sent, txs , waletAddress} = btcAddressInfo;
+    const { balance, n_tx, total_received, total_sent, txs, waletAddress } = btcAddressInfo;
 
     return (
+
         <Box sx={{ p: 2 }}>
+            <ButtonGroup sx={{ mb: '30px' }} variant="contained" aria-label="outlined primary button group">
+                <Button onClick={() => {
+                }}>USD</Button>
+                <Button>EUR</Button>
+                <Button>BTC</Button>
+            </ButtonGroup>
             <Typography variant="h5" gutterBottom>
                 BTC Address Search Info
             </Typography>
@@ -46,7 +57,6 @@ export const BtcAddressInfo = (address: { address1: string }) => {
                 Total spent: {total_sent}
             </Typography>
             Total Unspent: {formatPrice(total_received - total_sent)}
-            //TODO: NEED TO PROVIDE UNSPENT DATA
             <Typography variant="body1" gutterBottom>
                 Balance: {formatPrice(balance)}
             </Typography>
@@ -77,21 +87,21 @@ export const BtcAddressInfo = (address: { address1: string }) => {
                                 Confirmations: {data.confirmations}
                             </Typography>
                             <Typography variant="body1" gutterBottom>
-                                NEED TO FIX
+
                                 Total Btc Input: {data.inputs.length}
                             </Typography>
                             <Typography variant="body1" gutterBottom>
-                                NEED TO FIX
+
                                 Total Btc Output: {data.outputs.length}
                             </Typography>
                             <Typography variant="body1" gutterBottom>
                                 Total Fees: {formatPrice(data.fees)}
                             </Typography>
                             <Button sx={{
-                                background:'blue',
+                                background: 'blue',
                                 height: '50px',
                                 color: 'white'
-                            }} onClick={()=> handleOnclick(waletAddress, data.hash)}>Subscribe</Button>
+                            }} onClick={() => handleOnclick(waletAddress, data.hash)}>Subscribe</Button>
                         </Box>
                     )
                 })
