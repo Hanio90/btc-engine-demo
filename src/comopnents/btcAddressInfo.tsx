@@ -1,16 +1,20 @@
 import { useState } from 'react';
 import { Box, Typography, TextField, Button } from '@mui/material';
 import { formatPrice } from '../util/util'
-import { useBtcAddressInfo } from '../hooks/useBtcAddressInfo'
+import { BtcAddressInfoInterface, useBtcAddressInfo } from '../hooks/useBtcAddressInfo'
+import { getUpdates } from '@/hooks/useGetUpdatedEvents';
 
-export const BtcAddressInfo = (address:{address1:string}) => {
-
- 
+export const BtcAddressInfo = (address: { address1: string }) => {
     const apiUrl = `https://api.blockcypher.com/v1/btc/main/addrs/${address.address1}/full`;
     const { btcAddressInfo, isLoading, error } = useBtcAddressInfo({ apiUrl });
-    // TODO: create new hook for transaction data!
+ 
+    const handleOnclick = (waletAddress:any, hash:any)=>{
+        console.log('testing');
+        const test = getUpdates(waletAddress, hash)
+        console.log('testing',test);
+    }
 
-console.log('error',error);
+    console.log('error', error);
     if (isLoading) {
         return <Typography>Loading...</Typography>;
     }
@@ -25,7 +29,7 @@ console.log('error',error);
         );
     }
 
-    const { balance, n_tx, total_received, total_sent, txs } = btcAddressInfo;
+    const { balance, n_tx, total_received, total_sent, txs , waletAddress} = btcAddressInfo;
 
     return (
         <Box sx={{ p: 2 }}>
@@ -50,7 +54,7 @@ console.log('error',error);
                 BTC Transactions Info
             </Typography>
             {
-                
+
                 txs.map((data, index) => {
                     return (
                         <Box sx={{
@@ -77,18 +81,23 @@ console.log('error',error);
                                 Total Btc Input: {data.inputs.length}
                             </Typography>
                             <Typography variant="body1" gutterBottom>
-                            NEED TO FIX
-                            Total Btc Output: {data.outputs.length}
+                                NEED TO FIX
+                                Total Btc Output: {data.outputs.length}
                             </Typography>
                             <Typography variant="body1" gutterBottom>
-                               Total Fees: {formatPrice(data.fees)}
+                                Total Fees: {formatPrice(data.fees)}
                             </Typography>
+                            <Button sx={{
+                                background:'blue',
+                                height: '50px',
+                                color: 'white'
+                            }} onClick={()=> handleOnclick(waletAddress, data.hash)}>Subscribe</Button>
                         </Box>
                     )
                 })
-             
+
             }
-            
+
         </Box>
     );
 };

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 
-interface BtcAddressInfo {
-    address: string;
+export interface BtcAddressInfoInterface {
+    waletAddress: string;
     balance: number;
     n_tx: number; //The n_tx field is used to count the number of transactions that have been sent to or from a particular address
     total_received: number;
@@ -26,7 +26,7 @@ interface UseBtcAddressInfoProps {
 }
 
 export const useBtcAddressInfo = ({ apiUrl }: UseBtcAddressInfoProps) => {
-    const [btcAddressInfo, setBtcAddressInfo] = useState<BtcAddressInfo | null>(null);
+    const [btcAddressInfo, setBtcAddressInfo] = useState<BtcAddressInfoInterface | null>(null);
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [error, setError] = useState<string | null>(null);
 
