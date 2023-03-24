@@ -1,5 +1,7 @@
 import * as React from 'react';
+import { useState } from 'react';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { TextField, Button } from '@mui/material';
 import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -8,19 +10,34 @@ import NavBar from './navbar';
 import { BtcAddressInfo } from './btcAddressInfo';
 
 const mdTheme = createTheme();
+const centerfy = {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    mt: '20px'
+}
 
 
-function DashboardContent ()  {
+function DashboardContent() {
+    const [address, setAddress] = useState<string>('');
+    const [search, setSearch] = useState<boolean>(false)
+
+    const handleSearch = () => {
+        console.log("FUCKING WORKS")
+        setSearch(true);
+    };
+
+    const handleChange = (value: any) => {
+        setSearch(false);
+        setAddress(value);
+    }
+
     return (
         <ThemeProvider theme={mdTheme}>
             <Box sx={{ display: 'flex' }}>
                 <CssBaseline />
                 <NavBar>
-                    <Toolbar
-                        sx={{
-                            pr: '24px', // keep right padding when drawer closed
-                        }}
-                    >
+                    <Toolbar>
                         <Typography
                             component="h1"
                             variant="h6"
@@ -46,17 +63,23 @@ function DashboardContent ()  {
                     overflow: 'auto',
                 }}
             >
-                  {<Box sx={{
-                display: 'flex',
-                flexDirection: 'row',
-                justifyContent: 'center'
-            }}>
-              
-                <BtcAddressInfo />
-            </Box>}
+                {<Box sx={centerfy}>
+                    <TextField
+                        label="BTC Address"
+                        onChange={(event) => handleChange(event.target.value)}
+                    />
+                    <Button onClick={handleSearch} disabled={!address}>Search</Button>
+
+
+                </Box >}
+                <Box sx={centerfy} >
+                    {address && search &&
+                        <BtcAddressInfo address1={address} />
+                    }
+                </Box>
             </Box>
             <Toolbar />
-          
+
         </ThemeProvider>
     );
 }

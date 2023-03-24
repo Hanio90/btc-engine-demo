@@ -7,9 +7,10 @@ interface BtcAddressInfo {
     total_received: number;
     total_sent: number;
     txs: transactions[];
+    error:string
 }
 
-interface transactions{
+interface transactions {
     hash: string;
     received: string;
     status: string;
@@ -36,11 +37,14 @@ export const useBtcAddressInfo = ({ apiUrl }: UseBtcAddressInfoProps) => {
                 const response = await fetch(apiUrl);
                 const data = await response.json();
                 console.log('the data', data)
+                if(data.error){
+                    setError(data.error)
+                }
                 setBtcAddressInfo(data);
-              } catch (e) {
+            } catch (e) {
                 setError('Error fetching data');
-              }
-              setIsLoading(false);
+            }
+            setIsLoading(false);
         };
 
         fetchBtcAddressInfo();
