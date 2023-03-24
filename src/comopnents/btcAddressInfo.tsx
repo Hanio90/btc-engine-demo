@@ -1,51 +1,15 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Box, Typography, TextField, Button } from '@mui/material';
 import {formatPrice} from '../util/util'
-
-interface BtcAddressInfo {
-    address: string;
-    balance: number;
-    //The n_tx field is used to count the number of transactions 
-    //that have been sent to or from a particular address
-    n_tx: number;
-    total_received: string;
-}
-
-interface UseBtcAddressInfoProps {
-    apiUrl: string;
-}
-
-export const useBtcAddressInfo = ({ apiUrl }: UseBtcAddressInfoProps) => {
-    const [btcAddressInfo, setBtcAddressInfo] = useState<BtcAddressInfo | null>(null);
-    const [isLoading, setIsLoading] = useState<boolean>(false);
-    const [error, setError] = useState<string | null>(null);
-
-    useEffect(() => {
-        const fetchBtcAddressInfo = async () => {
-            setIsLoading(true);
-            try {
-                const response = await fetch(apiUrl);
-                const data = await response.json();
-                console.log('the data', data)
-                setBtcAddressInfo(data);
-              } catch (e) {
-                setError('Error fetching data');
-              }
-              setIsLoading(false);
-        };
-
-        fetchBtcAddressInfo();
-    }, [apiUrl]);
-
-    return { btcAddressInfo, isLoading, error };
-};
+import {useBtcAddressInfo} from '../hooks/useBtcAddressInfo'
 
 interface BtcAddressInfoProps { }
 
 export const BtcAddressInfo = (props: BtcAddressInfoProps) => {
     const [address1, setAddress] = useState<string>('');
-    const apiUrl = `https://api.blockcypher.com/v1/btc/main/addrs/1Di1YoMov6Ua3gPedfQz7TkP6iTLqbPUzi`;
+    const apiUrl = `https://api.blockcypher.com/v1/btc/main/addrs/1Di1YoMov6Ua3gPedfQz7TkP6iTLqbPUzi/full`;
     const { btcAddressInfo, isLoading, error } = useBtcAddressInfo({ apiUrl });
+    // TODO: create new hook for transaction data!
 
     const handleSearch = () => {
         setAddress(address);
@@ -75,31 +39,37 @@ export const BtcAddressInfo = (props: BtcAddressInfoProps) => {
         );
     }
 
-    const { balance, n_tx, total_received,address } = btcAddressInfo;
+    const { balance, n_tx, total_received,address, total_sent } = btcAddressInfo;
 
     return (
         <Box sx={{ p: 2 }}>
-            <Typography variant="h5" gutterBottom>
-                BTC Address Info
-            </Typography>
             <TextField
                 label="BTC Address"
                 value={address}
                 onChange={(event) => setAddress(event.target.value)}
             />
             <Button onClick={handleSearch}>Search</Button>
-            <Typography variant="body1" gutterBottom>
-                Address: {address}
+            <Typography variant="h5" gutterBottom>
+                BTC Address Search Info
             </Typography>
             <Typography variant="body1" gutterBottom>
-                Balance: {formatPrice(balance)}
-            </Typography>
-            <Typography variant="body1" gutterBottom>
-                Transaction count: {n_tx}
+                Confirmed Transactions: {n_tx}
             </Typography>
             <Typography variant="body1" gutterBottom>
                 Total received: {total_received}
             </Typography>
+            <Typography variant="body1" gutterBottom>
+                Total spent: {total_sent}
+            </Typography>
+            Total Unspent: {total_received - total_sent}
+            //TODO: NEED TO PROVIDE UNSPENT DATA
+            <Typography variant="body1" gutterBottom>
+                Balance: {formatPrice(balance)}
+            </Typography>
+            <Typography variant="h5" gutterBottom>
+                BTC Transaction Search Info
+            </Typography>
+            DISPLAY TRANSACTION DATA
         </Box>
     );
 };
