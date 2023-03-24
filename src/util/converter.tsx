@@ -34,15 +34,17 @@ interface BtcConverterProps {
   currency: 'USD' | 'EUR' | 'BTC';
 }
 
-const formatPrice = (amount: number, currency: 'USD' | 'EUR'| 'BTC') => {
+export const formatPriceData = (amount: number, currency: string) => {
+  console.log('the amount', amount)
   return new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: currency,
-    maximumFractionDigits: 2
   }).format(amount);
 };
 
-export const BtcConverter = ({ btcAmount, currency }: BtcConverterProps) => {
+export const BtcConverter = ( btcAmount: number, currency:string ) => {
+  console.log('look here', btcAmount)
+  console.log('look here', currency)
   const { btcPriceInfo, isLoading, error } = useBtcPriceInfo();
 
   if (isLoading) {
@@ -75,5 +77,7 @@ export const BtcConverter = ({ btcAmount, currency }: BtcConverterProps) => {
       convertedCurrency = 'BTC';
   }
 
-  return <div>{formatPrice(convertedAmount, convertedCurrency)}</div>;
+  console.log('convertedAmount',convertedAmount)
+  console.log('convertedAmount',convertedCurrency)
+  return <div>{formatPriceData(convertedAmount, convertedCurrency)}</div>;
 };
