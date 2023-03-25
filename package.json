@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "jest --watch"
+    "test": "jest"
   },
   "dependencies": {
     "@emotion/react": "^11.10.6",
@@ -33,6 +33,7 @@
     "@jest/globals": "^29.5.0",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^14.0.0",
+    "@testing-library/user-event": "^14.4.3",
     "@types/jquery": "^3.5.16",
     "jest": "^29.5.0",
     "jest-environment-jsdom": "^29.5.0"
