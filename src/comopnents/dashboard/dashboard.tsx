@@ -23,7 +23,6 @@ function DashboardContent() {
     const [search, setSearch] = useState<boolean>(false)
 
     const handleSearch = () => {
-        console.log("FUCKING WORKS")
         setSearch(true);
     };
 

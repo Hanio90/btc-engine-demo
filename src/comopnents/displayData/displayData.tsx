@@ -1,29 +1,15 @@
 
 import { Box, Typography, Button } from '@mui/material';
-import { getUpdates } from '@/hooks/useGetUpdatedEvents';
-import {  formatPriceData, useBtcPriceInfo } from '@/util/converter';
+import {  formatPriceData, useBtcPriceInfo } from '../../util/converter';
 import { BtcAddressInfoInterface } from '../../types/types';
-
-
 
 export const DisplayData = (data: { btcAddressData: BtcAddressInfoInterface, currency: string }) => {
     const { btcAddressData, currency } = data
-    const { balance, n_tx, total_received, total_sent, txs, waletAddress } = btcAddressData;
+    const { balance, n_tx, total_received, total_sent, txs, walletAddress } = btcAddressData;
     const { btcPriceInfo } = useBtcPriceInfo()
-    console.log('btcPriceInfo', btcPriceInfo)
-
-    console.log('total_sent', total_sent)
-
-    console.log('total_received', total_received)
-
-    console.log('total_received', btcPriceInfo.usd)
     const usdRecievedBtcConverstion = total_received / btcPriceInfo.usd;
-    console.log('dsadasda', usdRecievedBtcConverstion)
-
     const handleOnclick = (waletAddress: any, hash: any) => {
-        console.log('testing');
-        const test = getUpdates(waletAddress, hash)
-        console.log('testing', test);
+     
     }
     return (
         <Box sx={{ p: 2 }}>
@@ -142,7 +128,7 @@ export const DisplayData = (data: { btcAddressData: BtcAddressInfoInterface, cur
                                 background: 'blue',
                                 height: '50px',
                                 color: 'white'
-                            }} onClick={() => handleOnclick(waletAddress, data.hash)}>Subscribe</Button>
+                            }} onClick={() => handleOnclick(walletAddress, data.hash)}>Subscribe</Button>
                         </Box>
                     )
                 })

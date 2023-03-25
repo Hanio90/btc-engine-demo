@@ -9,9 +9,6 @@ export const getUpdates = (waletAddress:any, hash: any) => {
         const shortHash = hash.substring(0, 6) + "...";
         const total = tx.total / 100000000;
         const addrs = waletAddress;
-        console.log('shortHash',shortHash)
-        console.log('total',total)
-        console.log('addrs',addrs)
         $('#browser-websocket').before("<div>Unconfirmed transaction " + shortHash + " totalling " + total + "BTC involving addresses " + addrs + "</div>");
         count++;
         if (count > 10) ws.close();

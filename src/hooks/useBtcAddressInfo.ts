@@ -18,7 +18,7 @@ export const useBtcAddressInfo = ({ apiUrl }: UseBtcAddressInfoProps) => {
             try {
                 const response = await fetch(apiUrl);
                 const data = await response.json();
-                console.log('the data', data)
+                // console.log('the data', data)
                 if(data.error){
                     setError(data.error)
                 }

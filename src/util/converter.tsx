@@ -1,7 +1,6 @@
 import { BtcPriceInfo } from '@/types/types';
 import { useEffect, useState } from 'react';
 
-
 export const useBtcPriceInfo = () => {
   const [btcPriceInfo, setBtcPriceInfo] = useState<BtcPriceInfo>({ usd: 0, eur: 0 });
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -26,9 +25,7 @@ export const useBtcPriceInfo = () => {
   return { btcPriceInfo, isLoading, error };
 };
 
-
 export const formatPriceData = (amount: number, currency: string) => {
-  console.log('the amount', amount)
   return new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: currency,
