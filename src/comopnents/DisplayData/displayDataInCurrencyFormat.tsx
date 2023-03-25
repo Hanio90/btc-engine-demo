@@ -2,31 +2,11 @@
 import { Box, Typography, Button } from '@mui/material';
 import { getUpdates } from '@/hooks/useGetUpdatedEvents';
 import {  formatPriceData, useBtcPriceInfo } from '@/util/converter';
+import { BtcAddressInfoInterface } from '../../types/types';
 
 
-export interface BtcAddressInfoInterface {
-    waletAddress: string;
-    balance: number;
-    n_tx: number; //The n_tx field is used to count the number of transactions that have been sent to or from a particular address
-    total_received: number;
-    total_sent: number;
-    txs: transactions[];
-    error: string
-}
 
-interface transactions {
-    hash: string;
-    received: string;
-    status: string;
-    size: number;
-    confirmations: number;
-    inputs: any[];
-    outputs: any[];
-    fees: number;
-    confirmed : string | undefined;
-}
-
-export const DisplayDataInCurrencyFormat = (data: { btcAddressData: BtcAddressInfoInterface, currency: string }) => {
+export const DisplayData = (data: { btcAddressData: BtcAddressInfoInterface, currency: string }) => {
     const { btcAddressData, currency } = data
     const { balance, n_tx, total_received, total_sent, txs, waletAddress } = btcAddressData;
     const { btcPriceInfo } = useBtcPriceInfo()

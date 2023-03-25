@@ -1,9 +1,6 @@
+import { BtcPriceInfo } from '@/types/types';
 import { useEffect, useState } from 'react';
 
-interface BtcPriceInfo {
-  usd: number;
-  eur: number;
-}
 
 export const useBtcPriceInfo = () => {
   const [btcPriceInfo, setBtcPriceInfo] = useState<BtcPriceInfo>({ usd: 0, eur: 0 });
@@ -29,10 +26,6 @@ export const useBtcPriceInfo = () => {
   return { btcPriceInfo, isLoading, error };
 };
 
-interface BtcConverterProps {
-  btcAmount: number;
-  currency: 'USD' | 'EUR' | 'BTC';
-}
 
 export const formatPriceData = (amount: number, currency: string) => {
   console.log('the amount', amount)
@@ -40,44 +33,4 @@ export const formatPriceData = (amount: number, currency: string) => {
     style: 'currency',
     currency: currency,
   }).format(amount);
-};
-
-export const BtcConverter = ( btcAmount: number, currency:string ) => {
-  console.log('look here', btcAmount)
-  console.log('look here', currency)
-  const { btcPriceInfo, isLoading, error } = useBtcPriceInfo();
-
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
-
-  if (error) {
-    return <div>{error}</div>;
-  }
-
-  const { usd, eur } = btcPriceInfo;
-  let convertedAmount: number;
-  let convertedCurrency: 'USD' | 'EUR' | 'BTC' = 'BTC';
-
-  switch (currency) {
-    case 'USD':
-      convertedAmount = btcAmount * usd;
-      convertedCurrency = 'USD';
-      break;
-    case 'EUR':
-      convertedAmount = btcAmount * eur;
-      convertedCurrency = 'EUR';
-      break;
-    case 'BTC':
-      convertedAmount = btcAmount;
-      convertedCurrency = 'BTC';
-      break;
-    default:
-      convertedAmount = 0;
-      convertedCurrency = 'BTC';
-  }
-
-  console.log('convertedAmount',convertedAmount)
-  console.log('convertedAmount',convertedCurrency)
-  return <div>{formatPriceData(convertedAmount, convertedCurrency)}</div>;
 };

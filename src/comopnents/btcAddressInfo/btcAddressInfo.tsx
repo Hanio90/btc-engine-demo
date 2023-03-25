@@ -1,9 +1,9 @@
 
 import { Box, Typography, Button } from '@mui/material';
-import { useBtcAddressInfo } from '../hooks/useBtcAddressInfo'
+import { useBtcAddressInfo } from '../../hooks/useBtcAddressInfo'
 import ButtonGroup from '@mui/material/ButtonGroup';
 import { useState } from 'react';
-import { DisplayDataInCurrencyFormat } from './displayDataInCurrencyFormat';
+import { DisplayData } from '../DisplayData/displayDataInCurrencyFormat';
 
 export const BtcAddressInfo = (address: { address1: string }) => {
     const apiUrl = `https://api.blockcypher.com/v1/btc/main/addrs/${address.address1}/full`;
@@ -45,7 +45,7 @@ export const BtcAddressInfo = (address: { address1: string }) => {
                     }}
                 >BTC</Button>
             </ButtonGroup>
-            <DisplayDataInCurrencyFormat btcAddressData={btcAddressInfo} currency={useCurrency}/>
+            <DisplayData btcAddressData={btcAddressInfo} currency={useCurrency}/>
         </Box>
     );
 };
