@@ -1,8 +1,7 @@
 
 import { Box, Typography, Button } from '@mui/material';
-import { formatPrice } from '../util/util'
 import { getUpdates } from '@/hooks/useGetUpdatedEvents';
-import { BtcConverter, formatPriceData, useBtcPriceInfo } from '@/util/converter';
+import {  formatPriceData, useBtcPriceInfo } from '@/util/converter';
 
 
 export interface BtcAddressInfoInterface {

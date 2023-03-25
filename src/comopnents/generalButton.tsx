@@ -1,6 +1,6 @@
 import React from 'react';
 import Button from '@mui/material/Button';
-import { useTheme } from '@mui/material/styles';
+
 import { SxProps } from '@mui/system';
 import { Theme } from '@mui/material/styles';
 

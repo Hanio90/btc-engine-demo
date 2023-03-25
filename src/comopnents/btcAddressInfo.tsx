@@ -1,10 +1,7 @@
 
 import { Box, Typography, Button } from '@mui/material';
-import { formatPrice } from '../util/util'
 import { useBtcAddressInfo } from '../hooks/useBtcAddressInfo'
-import { getUpdates } from '@/hooks/useGetUpdatedEvents';
 import ButtonGroup from '@mui/material/ButtonGroup';
-import { useBtcPriceInfo } from '@/util/converter';
 import { useState } from 'react';
 import { DisplayDataInCurrencyFormat } from './displayDataInCurrencyFormat';
 

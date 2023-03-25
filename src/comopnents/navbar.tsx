@@ -3,12 +3,9 @@ import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
-import Image from 'next/image';
 import { styled } from '@mui/material/styles';
 import { useScrollTrigger } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
-
-import NoBgLogo from '../../../public/images/logo/logoNoBg.png';
 import Typography from '@mui/material/Typography';
 
 interface Props {
