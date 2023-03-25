@@ -18,22 +18,22 @@ export const DisplayData = (data: {
       <Typography variant="body1">Confirmed Transactions: {n_tx}</Typography>
       {currency === "USD" && (
         <div>
-          <Typography variant="body1">
+          <Typography variant="body1" data-testid="recievedUSD">
             Total received:{" "}
             {formatPriceData(total_received * 0.0002740161855743607, currency)}
           </Typography>
-          <Typography variant="body1">
+          <Typography variant="body1" data-testid="spentUSD">
             Total spent:{" "}
             {formatPriceData(total_sent * 0.0002740161855743607, currency)}
           </Typography>
-          <Typography variant="body1">
-            Total Unspent:{" "}
+          <Typography variant="body1" data-testid="unspentUSD">
+            Total unspent:{" "}
             {formatPriceData(
               (total_received - total_sent) * 0.0002740161855743607,
               currency
             )}
           </Typography>
-          <Typography variant="body1">
+          <Typography variant="body1" data-testid="balanceUSD">
             Balance:{" "}
             {formatPriceData(balance * 0.0002740161855743607, currency)}
           </Typography>
@@ -41,22 +41,22 @@ export const DisplayData = (data: {
       )}
       {currency === "EUR" && (
         <div>
-          <Typography variant="body1">
+          <Typography variant="body1" data-testid="recievedEUR">
             Total received:{" "}
             {formatPriceData(total_received * 0.0002541785098035193, currency)}
           </Typography>
-          <Typography variant="body1">
+          <Typography variant="body1" data-testid="spentEUR">
             Total spent:{" "}
             {formatPriceData(total_sent * 0.0002541785098035193, currency)}
           </Typography>
-          <Typography variant="body1">
-            Total Unspent:{" "}
+          <Typography variant="body1" data-testid="unspentEUR">
+            Total unspent:{" "}
             {formatPriceData(
               (total_received - total_sent) * 0.0002541785098035193,
               currency
             )}
           </Typography>
-          <Typography variant="body1">
+          <Typography variant="body1" data-testid="balanceEUR">
             Balance:{" "}
             {formatPriceData(balance * 0.0002541785098035193, currency)}
           </Typography>
@@ -64,21 +64,21 @@ export const DisplayData = (data: {
       )}
       {currency === "BTC" && (
         <div>
-          <Typography variant="body1">
+          <Typography variant="body1" data-testid="recievedBTC">
             Total received: BTC{" "}
             {(total_received * 0.0002740161855743607) / btcPriceInfo.usd}
           </Typography>
-          <Typography variant="body1">
+          <Typography variant="body1" data-testid="spentBTC">
             Total spent: BTC{" "}
             {(total_sent * 0.0002740161855743607) / btcPriceInfo.usd}
           </Typography>
-          <Typography variant="body1">
-            Total Unspent:{" "}
+          <Typography variant="body1" data-testid="unspentBTC">
+            Total unspent:{" "}
             {(total_received * 0.0002740161855743607 -
               total_sent * 0.0002740161855743607) /
               btcPriceInfo.usd}
           </Typography>
-          <Typography variant="body1">
+          <Typography variant="body1" data-testid="balanceBTC">
             Balance:{" "}
             {formatPriceData(
               (balance * 0.0002740161855743607) / btcPriceInfo.usd,
@@ -97,39 +97,39 @@ export const DisplayData = (data: {
             key={index}
           >
             <Typography variant="body1">Transaction #: {index + 1}</Typography>
-            <Typography variant="body1">
+            <Typography variant="body1" data-testid="transactionHash">
               Transaction Hash: {data.hash}
             </Typography>
-            <Typography variant="body1">
+            <Typography variant="body1" data-testid="recieved">
               Received Time: {data.received}
             </Typography>
-            <Typography variant="body1">
+            <Typography variant="body1" data-testid="Confirmed">
               Status: {data.confirmed ? "Confirmed" : " Not Confirmed"}
             </Typography>
             Size in bytes: {data.size}
-            <Typography variant="body1">
+            <Typography variant="body1" data-testid="confirmations">
               Confirmations: {data.confirmations}
             </Typography>
-            <Typography variant="body1">
+            <Typography variant="body1" data-testid="inputs">
               Total Btc Input: {data.inputs.length}
             </Typography>
-            <Typography variant="body1">
+            <Typography variant="body1" data-testid="outputs">
               Total Btc Output: {data.outputs.length}
             </Typography>
             {currency === "USD" && (
-              <Typography variant="body1">
+              <Typography variant="body1" data-testid="feesUsd">
                 Total Fees:{" "}
                 {formatPriceData(data.fees * 0.0002740161855743607, currency)}
               </Typography>
             )}
             {currency === "EUR" && (
-              <Typography variant="body1">
+              <Typography variant="body1" data-testid="feesEUR">
                 Total Fees:{" "}
                 {formatPriceData(data.fees * 0.0002541785098035193, currency)}
               </Typography>
             )}
             {currency === "BTC" && (
-              <Typography variant="body1">
+              <Typography variant="body1" data-testid="feesBTC">
                 Total Fees:{" "}
                 {(data.fees * 0.0002740161855743607) / btcPriceInfo.usd}
               </Typography>
