@@ -23,6 +23,7 @@ interface transactions {
     inputs: any[];
     outputs: any[];
     fees: number;
+    confirmed : string | undefined;
 }
 
 export const DisplayDataInCurrencyFormat = (data: { btcAddressData: BtcAddressInfoInterface, currency: string }) => {
@@ -121,7 +122,7 @@ export const DisplayDataInCurrencyFormat = (data: { btcAddressData: BtcAddressIn
                                 Received Time: {data.received}
                             </Typography>
                             <Typography variant="body1" gutterBottom>
-                                Status: {data.status}
+                                Status: {data.confirmed ? 'Confirmed' : ' Not Confirmed'}
                             </Typography>
                             Size in bytes: {data.size}
                             <Typography variant="body1" gutterBottom>

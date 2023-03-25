@@ -18,6 +18,7 @@ interface transactions {
     confirmations: number;
     inputs: any[];
     outputs: any[];
+    confirmed : string | undefined;
     fees: number;
 }
 
