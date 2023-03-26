@@ -4,11 +4,11 @@ export interface BtcAddressInfo {
   n_tx: number; //The n_tx field is used to count the number of transactions that have been sent to or from a particular address
   total_received: number;
   total_sent: number;
-  txs: transactions[];
+  txs: Transactions[];
   error?: string;
 }
 
-interface transactions {
+export interface Transactions {
   hash: string;
   received: string;
   status?: string;

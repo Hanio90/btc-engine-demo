@@ -53,7 +53,7 @@ describe("BtcAddressInfo", () => {
 
   it("should click the USD Button", () => {
     mock.isLoading = true;
-    const { baseElement, getByText } = render(
+    const { getByText } = render(
       <BtcAddressInfo address1="15urYnyeJe3gwbGJ74wcX89Tz7ZtsFDVew" />
     );
     expect(getByText("Loading...")).toBeInTheDocument();
@@ -62,7 +62,7 @@ describe("BtcAddressInfo", () => {
   it("should click the USD Button", () => {
     mock.isLoading = false;
     mock.error = "Error fetching data";
-    const { baseElement, getByText } = render(
+    const { getByText } = render(
       <BtcAddressInfo address1="15urYnyeJe3gwbGJ74wcX89Tz7ZtsFDVew" />
     );
     expect(getByText("Error fetching data")).toBeInTheDocument();
