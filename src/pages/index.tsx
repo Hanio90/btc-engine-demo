@@ -1,6 +1,9 @@
 import Head from "next/head";
-import styles from "@/styles/Home.module.css";
+import { ThemeProvider } from "@mui/material/styles";
 import { Dashboard } from "@/comopnents/dashboard/dashboard";
+import theme from "@/styles/muiTheme";
+import { Box, CssBaseline } from "@mui/material";
+import NavBar from "@/comopnents/navbar/navBar";
 
 export default function Home() {
   return (
@@ -16,8 +19,15 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className={styles.main}>
-        <Dashboard />
+
+      <main>
+        <ThemeProvider theme={theme}>
+          <Box sx={{ display: "flex" }}>
+            <CssBaseline />
+            <NavBar />
+          </Box>
+          <Dashboard />
+        </ThemeProvider>
       </main>
     </>
   );

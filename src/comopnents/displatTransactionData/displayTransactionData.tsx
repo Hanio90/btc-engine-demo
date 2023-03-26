@@ -1,5 +1,5 @@
 import { Box, Typography, Button, Modal, Pagination } from "@mui/material";
-import { formatPriceData, useBtcPriceInfo } from "../../util/converter";
+import { formatPriceData } from "../../util/converter";
 import { BtcPriceInfo, Transactions } from "../../types/types";
 import { useState } from "react";
 import { getTransactionUpdates } from "../../hooks/transactionUpdates";
@@ -23,8 +23,12 @@ export const DisplayTransactionData = (data: {
   txs: Transactions[];
   btcPriceInfo: BtcPriceInfo;
 }) => {
+  const { currency, txs, btcPriceInfo } = data;
   const [modalBlockHash, setModalBlockHash] = useState<string>("");
   const [open, setOpen] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const itemsPerPage = 1;
 
   const handleOpen = (txData: any) => {
     console.log("the data is here transactionData", txData);
@@ -36,11 +40,14 @@ export const DisplayTransactionData = (data: {
     setOpen(false);
   };
 
-  const { currency, txs, btcPriceInfo } = data;
+  const transactionsToShow = txs.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
 
   return (
-    <Box>
-      {txs.map((tx, index) => {
+    <Box sx={{ display: "grid" }}>
+      {transactionsToShow.map((tx, index) => {
         return (
           <Box key={index}>
             <Typography variant="body1">Transaction #: {index + 1}</Typography>
@@ -85,10 +92,15 @@ export const DisplayTransactionData = (data: {
             )}
             <Button
               sx={{
-                background: "blue",
+                background: "#00ffff",
                 height: "50px",
-                color: "white",
                 mb: "20px",
+                color: "#000000",
+                mt: "5px",
+                "&:hover": {
+                  background: "#ffffff",
+                  boxShadow: "-3px 4px 8px  rgba(0, 0, 0, 0.3)",
+                },
               }}
               role="button"
               data-testid="subscribe"
@@ -117,6 +129,21 @@ export const DisplayTransactionData = (data: {
           </Box>
         );
       })}
+      <Box sx={{ display: "flex", justifyContent: "center" }}>
+        <Pagination
+          count={txs.length}
+          page={currentPage}
+          siblingCount={1}
+          onChange={(event, value) => setCurrentPage(value)}
+          sx={{
+            "& .MuiPaginationItem-page": { color: "#00ffff" },
+            "& .MuiPaginationItem-page.Mui-selected": { color: "#ffffff" },
+            "& .MuiPaginationItem-root": {
+              color: "#00ffff",
+            },
+          }}
+        />
+      </Box>
     </Box>
   );
 };

@@ -12,10 +12,10 @@ interface Props {
 
 const StyledAppBar = styled(AppBar)({
   height: "4rem",
-  backgroundColor: "blue",
   boxShadow: "none",
   position: "fixed",
   display: "flex",
+  flexDirection: "column",
   alignItems: "center",
   justifyContent: "center",
 });
@@ -26,7 +26,7 @@ export default function NavBar(props: Props): JSX.Element {
       <CssBaseline />
       <Box sx={{ flexGrow: 1 }}>
         <StyledAppBar position="sticky">
-          <Typography variant="h5">Dashboard</Typography>
+          <Typography variant="h6">BTC Search Engine</Typography>
         </StyledAppBar>
         <Toolbar />
       </Box>

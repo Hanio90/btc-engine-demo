@@ -1,15 +1,12 @@
 import * as React from "react";
 import { useState } from "react";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { useTheme } from "@mui/material/styles";
 import { TextField, Button } from "@mui/material";
-import CssBaseline from "@mui/material/CssBaseline";
+
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
 import { BtcAddressInfo } from "../btcAddressInfo/btcAddressInfo";
-import NavBar from "../navbar/navBar";
 
-const mdTheme = createTheme();
 const centerfy = {
   display: "flex",
   flexDirection: "row",
@@ -17,7 +14,28 @@ const centerfy = {
   mt: "20px",
 };
 
+const autoSearchStyles = {
+  width: "28.7%",
+
+  "& .MuiInputBase-input": {
+    color: "white",
+  },
+  "& .MuiInputLabel-root": {
+    color: "white",
+  },
+  "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline": {
+    borderColor: "white",
+  },
+  "& .MuiOutlinedInput-root": {
+    backgroundColor: "rgba(255, 255, 255, 0.4)",
+  },
+  "& .MuiInputLabel-root.Mui-focused": {
+    color: "white",
+  },
+};
+
 export const Dashboard = () => {
+  const theme = useTheme();
   const [address, setAddress] = useState<string>("");
   const [search, setSearch] = useState<boolean>(false);
 
@@ -31,23 +49,7 @@ export const Dashboard = () => {
   };
 
   return (
-    <ThemeProvider theme={mdTheme}>
-      <Box sx={{ display: "flex" }}>
-        <CssBaseline />
-        <NavBar>
-          <Toolbar>
-            <Typography
-              component="h1"
-              variant="h6"
-              color="inherit"
-              noWrap
-              sx={{ flexGrow: 1 }}
-            >
-              Dashboard
-            </Typography>
-          </Toolbar>
-        </NavBar>
-      </Box>
+    <Box>
       <Box
         component="main"
         sx={{
@@ -59,27 +61,41 @@ export const Dashboard = () => {
       >
         {
           <Box sx={centerfy}>
-            <TextField
-              label="BTC Address"
-              aria-label="btc-address"
-              role="addressSearchField"
-              onChange={(event) => handleChange(event.target.value)}
-              inputProps={{ "data-testid": "addressSearchField" }}
-            />
             <Button
               onClick={handleSearch}
               disabled={!address}
               data-testid="searchButton"
+              sx={{
+                backgroundColor: "#00ffff",
+                color: "#000000",
+                "&:hover": {
+                  background: "#ffffff",
+                  boxShadow: "-3px 4px 8px  rgba(0, 0, 0, 0.3)",
+                },
+                ":disabled": {
+                  backgroundColor: "grey",
+                  color: "white",
+                },
+              }}
             >
               Search
             </Button>
+            <TextField
+              label="Address"
+              aria-label="btc-address"
+              role="addressSearchField"
+              onChange={(event) => handleChange(event.target.value)}
+              inputProps={{ "data-testid": "addressSearchField" }}
+              sx={autoSearchStyles}
+            />
           </Box>
         }
         <Box sx={centerfy}>
           {address && search && <BtcAddressInfo address1={address} />}
         </Box>
       </Box>
+
       <Toolbar />
-    </ThemeProvider>
+    </Box>
   );
 };

@@ -1,7 +1,6 @@
-import { Box, Typography } from "@mui/material";
+import { Card, Divider, Typography } from "@mui/material";
 import { useBtcPriceInfo } from "../../util/converter";
-import { BtcAddressInfo, BtcPriceInfo } from "../../types/types";
-
+import { BtcAddressInfo } from "../../types/types";
 import { DisplayAddressInfo } from "../DisplayAddressInfo/displayAddressInfo";
 import { DisplayTransactionData } from "../displatTransactionData/displayTransactionData";
 
@@ -14,12 +13,18 @@ export const DisplayData = (data: {
   const { btcPriceInfo } = useBtcPriceInfo();
 
   return (
-    <Box>
+    <Card variant="outlined" sx={{ borderColor: "#00ffff", padding: "1rem" }}>
       <Typography variant="h5">BTC Address Search Info</Typography>
       <DisplayAddressInfo
         btcAddressData={btcAddressData}
         currency={currency}
         btcPriceInfo={btcPriceInfo}
+      />
+      <Divider
+        sx={{
+          backgroundColor: "white",
+          mb: "20px",
+        }}
       />
       <Typography variant="h5">BTC Transactions Info</Typography>
 
@@ -28,6 +33,6 @@ export const DisplayData = (data: {
         txs={txs}
         btcPriceInfo={btcPriceInfo}
       />
-    </Box>
+    </Card>
   );
 };
