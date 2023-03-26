@@ -1,5 +1,5 @@
 export const mockBtcAddressData = {
-  walletAddress: "15urYnyeJe3gwbGJ74wcX89Tz7ZtsFDVew",
+  address: "15urYnyeJe3gwbGJ74wcX89Tz7ZtsFDVew",
   total_received: 13623974394090,
   total_sent: 13623974384090,
   balance: 10000,

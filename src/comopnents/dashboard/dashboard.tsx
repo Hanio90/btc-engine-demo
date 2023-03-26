@@ -6,8 +6,8 @@ import CssBaseline from "@mui/material/CssBaseline";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import NavBar from "../navbar/navBar";
 import { BtcAddressInfo } from "../btcAddressInfo/btcAddressInfo";
+import NavBar from "../navbar/navBar";
 
 const mdTheme = createTheme();
 const centerfy = {

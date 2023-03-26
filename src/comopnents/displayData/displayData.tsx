@@ -1,17 +1,39 @@
-import { Box, Typography, Button } from "@mui/material";
+import { Box, Typography, Button, Modal } from "@mui/material";
 import { formatPriceData, useBtcPriceInfo } from "../../util/converter";
 import { BtcAddressInfo } from "../../types/types";
+import { useState } from "react";
+
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 400,
+  bgcolor: "background.paper",
+  border: "2px solid #000",
+  boxShadow: 24,
+  pt: 2,
+  px: 4,
+  pb: 3,
+};
 
 export const DisplayData = (data: {
   btcAddressData: BtcAddressInfo;
   currency: string;
 }) => {
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
   const { btcAddressData, currency } = data;
-  const { balance, n_tx, total_received, total_sent, txs, walletAddress } =
+  const { balance, n_tx, total_received, total_sent, txs, address } =
     btcAddressData;
+  // console.log("the wallet address", address);
   const { btcPriceInfo } = useBtcPriceInfo();
-  const usdRecievedBtcConverstion = total_received / btcPriceInfo.usd;
-  const handleOnclick = (waletAddress: any, hash: any) => {};
+
   return (
     <Box>
       <Typography variant="h5">BTC Address Search Info</Typography>
@@ -37,6 +59,19 @@ export const DisplayData = (data: {
             Balance:{" "}
             {formatPriceData(balance * 0.0002740161855743607, currency)}
           </Typography>
+          <Button
+            sx={{
+              background: "blue",
+              height: "50px",
+              color: "white",
+              mb: "50px",
+            }}
+            role="button"
+            data-testid="subscribe"
+            onClick={handleOpen}
+          >
+            Subscribe
+          </Button>
         </div>
       )}
       {currency === "EUR" && (
@@ -106,7 +141,9 @@ export const DisplayData = (data: {
             <Typography variant="body1" data-testid="Confirmed">
               Status: {data.confirmed ? "Confirmed" : " Not Confirmed"}
             </Typography>
-            Size in bytes: {data.size}
+            <Typography variant="body1" data-testid="size">
+              Size in bytes: {data.size}
+            </Typography>
             <Typography variant="body1" data-testid="confirmations">
               Confirmations: {data.confirmations}
             </Typography>
@@ -134,16 +171,23 @@ export const DisplayData = (data: {
                 {(data.fees * 0.0002740161855743607) / btcPriceInfo.usd}
               </Typography>
             )}
-            <Button
-              sx={{
-                background: "blue",
-                height: "50px",
-                color: "white",
-              }}
-              onClick={() => handleOnclick(walletAddress, data.hash)}
-            >
-              Subscribe
-            </Button>
+
+            <div>
+              <Modal
+                open={open}
+                onClose={handleClose}
+                aria-labelledby="parent-modal-title"
+                aria-describedby="parent-modal-description"
+              >
+                <Box sx={{ ...style, width: 400 }}>
+                  <h2 id="parent-modal-title">SUBSCRIBED!</h2>
+                  <p id="parent-modal-description">
+                    You have subscribed to recieve updates for this wallets
+                    address: {address}
+                  </p>
+                </Box>
+              </Modal>
+            </div>
           </Box>
         );
       })}
