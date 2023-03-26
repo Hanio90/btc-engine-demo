@@ -22,11 +22,10 @@ const useBtcAddressInfo = ({ apiUrl }: UseBtcAddressInfoProps) => {
           setError(data.error);
         }
         setBtcAddressInfo(data);
-        setIsLoading(false);
       } catch (e) {
         setError("Error fetching data");
-        setIsLoading(false);
       }
+      setIsLoading(false);
     };
 
     fetchBtcAddressInfo();
