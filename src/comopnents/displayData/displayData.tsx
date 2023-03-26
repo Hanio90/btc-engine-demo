@@ -21,8 +21,11 @@ export const DisplayData = (data: {
   btcAddressData: BtcAddressInfo;
   currency: string;
 }) => {
+  const [modalHash, setModalHash] = useState<string>("");
   const [open, setOpen] = useState(false);
-  const handleOpen = () => {
+  const handleOpen = (hash: string) => {
+    console.log("the hash", hash);
+    setModalHash(hash);
     setOpen(true);
   };
   const handleClose = () => {
@@ -167,7 +170,7 @@ export const DisplayData = (data: {
               }}
               role="button"
               data-testid="subscribe"
-              onClick={handleOpen}
+              onClick={() => handleOpen(data.hash)}
             >
               Subscribe
             </Button>
@@ -183,7 +186,7 @@ export const DisplayData = (data: {
                   <h2 id="parent-modal-title">SUBSCRIBED!</h2>
                   <p id="parent-modal-description">
                     You have subscribed to recieve updates for this wallets
-                    address: {data.hash}
+                    address: {modalHash}
                   </p>
                 </Box>
               </Modal>
