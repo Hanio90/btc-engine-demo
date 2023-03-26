@@ -2,6 +2,7 @@ import { Box, Typography, Button, Modal } from "@mui/material";
 import { formatPriceData, useBtcPriceInfo } from "../../util/converter";
 import { BtcAddressInfo } from "../../types/types";
 import { useState } from "react";
+import { getTransactionUpdates } from "../../hooks/transactionUpdates";
 
 const style = {
   position: "absolute",
@@ -21,20 +22,20 @@ export const DisplayData = (data: {
   btcAddressData: BtcAddressInfo;
   currency: string;
 }) => {
-  const [modalHash, setModalHash] = useState<string>("");
+  const [modalBlockHash, setModalBlockHash] = useState<string>("");
   const [open, setOpen] = useState(false);
-  const handleOpen = (hash: string) => {
-    console.log("the hash", hash);
-    setModalHash(hash);
+
+  const handleOpen = (txData: any) => {
+    console.log("the data is here transactionData", txData);
+    setModalBlockHash(txData.block_hash);
+    getTransactionUpdates(txData);
     setOpen(true);
   };
   const handleClose = () => {
     setOpen(false);
   };
   const { btcAddressData, currency } = data;
-  const { balance, n_tx, total_received, total_sent, txs, address } =
-    btcAddressData;
-  // console.log("the wallet address", address);
+  const { balance, n_tx, total_received, total_sent, txs } = btcAddressData;
   const { btcPriceInfo } = useBtcPriceInfo();
 
   return (
@@ -113,7 +114,7 @@ export const DisplayData = (data: {
         </div>
       )}
       <Typography variant="h5">BTC Transactions Info</Typography>
-      {txs.map((data, index) => {
+      {txs.map((tx, index) => {
         return (
           <Box
             sx={{
@@ -123,42 +124,42 @@ export const DisplayData = (data: {
           >
             <Typography variant="body1">Transaction #: {index + 1}</Typography>
             <Typography variant="body1" data-testid="transactionHash">
-              Transaction Hash: {data.hash}
+              Transaction Hash: {tx.hash}
             </Typography>
             <Typography variant="body1" data-testid="recieved">
-              Received Time: {data.received}
+              Received Time: {tx.received}
             </Typography>
             <Typography variant="body1" data-testid="Confirmed">
-              Status: {data.confirmed ? "Confirmed" : " Not Confirmed"}
+              Status: {tx.confirmed ? "Confirmed" : " Not Confirmed"}
             </Typography>
             <Typography variant="body1" data-testid="size">
-              Size in bytes: {data.size}
+              Size in bytes: {tx.size}
             </Typography>
             <Typography variant="body1" data-testid="confirmations">
-              Confirmations: {data.confirmations}
+              Confirmations: {tx.confirmations}
             </Typography>
             <Typography variant="body1" data-testid="inputs">
-              Total Btc Input: {data.inputs.length}
+              Total Btc Input: {tx.inputs.length}
             </Typography>
             <Typography variant="body1" data-testid="outputs">
-              Total Btc Output: {data.outputs.length}
+              Total Btc Output: {tx.outputs.length}
             </Typography>
             {currency === "USD" && (
               <Typography variant="body1" data-testid="feesUsd">
                 Total Fees:{" "}
-                {formatPriceData(data.fees * 0.0002740161855743607, currency)}
+                {formatPriceData(tx.fees * 0.0002740161855743607, currency)}
               </Typography>
             )}
             {currency === "EUR" && (
               <Typography variant="body1" data-testid="feesEUR">
                 Total Fees:{" "}
-                {formatPriceData(data.fees * 0.0002541785098035193, currency)}
+                {formatPriceData(tx.fees * 0.0002541785098035193, currency)}
               </Typography>
             )}
             {currency === "BTC" && (
               <Typography variant="body1" data-testid="feesBTC">
                 Total Fees:{" "}
-                {(data.fees * 0.0002740161855743607) / btcPriceInfo.usd}
+                {(tx.fees * 0.0002740161855743607) / btcPriceInfo.usd}
               </Typography>
             )}
             <Button
@@ -170,7 +171,9 @@ export const DisplayData = (data: {
               }}
               role="button"
               data-testid="subscribe"
-              onClick={() => handleOpen(data.hash)}
+              onClick={() => {
+                handleOpen(tx);
+              }}
             >
               Subscribe
             </Button>
@@ -181,12 +184,11 @@ export const DisplayData = (data: {
                 aria-labelledby="parent-modal-title"
                 aria-describedby="parent-modal-description"
               >
-                {/* FIX THE FACT THAT THE HASH IS BEING PASSED THROUGH CORRECTLY */}
                 <Box sx={{ ...style, width: "800" }}>
                   <h2 id="parent-modal-title">SUBSCRIBED!</h2>
                   <p id="parent-modal-description">
-                    You have subscribed to recieve updates for this wallets
-                    address: {modalHash}
+                    You have subscribed to recieve updates for this block:{" "}
+                    {modalBlockHash}
                   </p>
                 </Box>
               </Modal>
