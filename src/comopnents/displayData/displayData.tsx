@@ -59,19 +59,6 @@ export const DisplayData = (data: {
             Balance:{" "}
             {formatPriceData(balance * 0.0002740161855743607, currency)}
           </Typography>
-          <Button
-            sx={{
-              background: "blue",
-              height: "50px",
-              color: "white",
-              mb: "50px",
-            }}
-            role="button"
-            data-testid="subscribe"
-            onClick={handleOpen}
-          >
-            Subscribe
-          </Button>
         </div>
       )}
       {currency === "EUR" && (
@@ -171,7 +158,19 @@ export const DisplayData = (data: {
                 {(data.fees * 0.0002740161855743607) / btcPriceInfo.usd}
               </Typography>
             )}
-
+            <Button
+              sx={{
+                background: "blue",
+                height: "50px",
+                color: "white",
+                mb: "50px",
+              }}
+              role="button"
+              data-testid="subscribe"
+              onClick={handleOpen}
+            >
+              Subscribe
+            </Button>
             <div>
               <Modal
                 open={open}
@@ -179,11 +178,12 @@ export const DisplayData = (data: {
                 aria-labelledby="parent-modal-title"
                 aria-describedby="parent-modal-description"
               >
-                <Box sx={{ ...style, width: 400 }}>
+                {/* FIX THE FACT THAT THE HASH IS BEING PASSED THROUGH CORRECTLY */}
+                <Box sx={{ ...style, width: "800" }}>
                   <h2 id="parent-modal-title">SUBSCRIBED!</h2>
                   <p id="parent-modal-description">
                     You have subscribed to recieve updates for this wallets
-                    address: {address}
+                    address: {data.hash}
                   </p>
                 </Box>
               </Modal>
