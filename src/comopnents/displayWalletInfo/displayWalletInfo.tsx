@@ -16,7 +16,7 @@ export const DisplayWalletInfo = (data: {
   }
 
   return (
-    <Box>
+    <Box sx={{ mb: "20px" }}>
       {currency !== "BTC" ? (
         <div>
           <Typography variant="body1">

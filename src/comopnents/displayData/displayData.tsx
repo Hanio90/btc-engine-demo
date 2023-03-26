@@ -8,7 +8,6 @@ import { DisplayTransactionData } from "../displatTransactionData/displayTransac
 export const DisplayData = (data: {
   btcAddressData: BtcAddressInfo;
   currency: string;
-  btcPriceInfo: BtcPriceInfo;
 }) => {
   const { btcAddressData, currency } = data;
   const { txs } = btcAddressData;

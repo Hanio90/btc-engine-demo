@@ -1,4 +1,4 @@
-import { Box, Typography, Button, Modal } from "@mui/material";
+import { Box, Typography, Button, Modal, Pagination } from "@mui/material";
 import { formatPriceData, useBtcPriceInfo } from "../../util/converter";
 import { BtcPriceInfo, Transactions } from "../../types/types";
 import { useState } from "react";
@@ -42,12 +42,7 @@ export const DisplayTransactionData = (data: {
     <Box>
       {txs.map((tx, index) => {
         return (
-          <Box
-            sx={{
-              mb: "50px",
-            }}
-            key={index}
-          >
+          <Box key={index}>
             <Typography variant="body1">Transaction #: {index + 1}</Typography>
             <Typography variant="body1" data-testid="transactionHash">
               Transaction Hash: {tx.hash}
@@ -93,7 +88,7 @@ export const DisplayTransactionData = (data: {
                 background: "blue",
                 height: "50px",
                 color: "white",
-                mb: "50px",
+                mb: "20px",
               }}
               role="button"
               data-testid="subscribe"
