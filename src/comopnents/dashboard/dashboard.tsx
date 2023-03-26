@@ -17,7 +17,7 @@ const centerfy = {
   mt: "20px",
 };
 
-function DashboardContent() {
+export const Dashboard = () => {
   const [address, setAddress] = useState<string>("");
   const [search, setSearch] = useState<boolean>(false);
 
@@ -82,8 +82,4 @@ function DashboardContent() {
       <Toolbar />
     </ThemeProvider>
   );
-}
-
-export default function Dashboard() {
-  return <DashboardContent />;
-}
+};

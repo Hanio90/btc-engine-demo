@@ -1,4 +1,4 @@
-export interface BtcAddressInfoInterface {
+export interface BtcAddressInfo {
   walletAddress: string;
   balance: number;
   n_tx: number; //The n_tx field is used to count the number of transactions that have been sent to or from a particular address

@@ -1,8 +1,6 @@
-import { render, fireEvent, screen } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
+import { render, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
-import Dashboard from "./dashboard";
-import { HtmlHTMLAttributes } from "react";
+import { Dashboard } from "./dashboard";
 
 describe("DisplayData", () => {
   it("should render the component", () => {

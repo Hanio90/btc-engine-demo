@@ -1,50 +1,52 @@
-import {
-  render,
-  renderHook,
-  fireEvent,
-  screen,
-  act,
-} from "@testing-library/react";
+import { fireEvent, render } from "@testing-library/react";
+
 import { BtcAddressInfo } from "./btcAddressInfo";
-import { useBtcAddressInfo } from "../../hooks/useBtcAddressInfo";
 import { mockBtcAddressData } from "../displayData/mockData";
+import "@testing-library/jest-dom";
 
-// act(() => {
-//   jest.mock("../../hooks/useBtcAddressInfo", () => ({
-//     useBtcAddressInfo: jest.fn().mockImplementation(() => {
-//       {
-//         mockBtcAddressData;
-//       }
-//     }),
-//   }));
-// });
-
-// global.fetch = jest.fn(() => {
-//   Promise.resolve({
-//     json: () => Promise.resolve({ message: "success" }),
-//   });
-// }) as jest.Mock;
+jest.mock("../../hooks/useBtcAddressInfo", () => ({
+  useBtcAddressInfo: jest.fn().mockImplementation(() => {
+    return {
+      btcAddressInfo: mockBtcAddressData,
+      isLoading: false,
+      error: null,
+    };
+  }),
+}));
 
 describe("BtcAddressInfo", () => {
   it("should render the component", () => {
-    act(() => {
-      const { baseElement } = render(
-        <BtcAddressInfo address1="15urYnyeJe3gwbGJ74wcX89Tz7ZtsFDVew" />
-      );
-
-      expect(baseElement).toBeDefined();
-    });
+    const { baseElement, debug, getByText } = render(
+      <BtcAddressInfo address1="15urYnyeJe3gwbGJ74wcX89Tz7ZtsFDVew" />
+    );
+    fireEvent.click(getByText("USD"));
+    expect(baseElement).toBeDefined();
   });
 
-  it("should rednder ", async () => {
-    //Arrange
+  it("should click the USD Button", () => {
+    const { baseElement, getByText } = render(
+      <BtcAddressInfo address1="15urYnyeJe3gwbGJ74wcX89Tz7ZtsFDVew" />
+    );
+    fireEvent.click(getByText("USD"));
+    expect(getByText("Viewing data in USD currency!")).toBeInTheDocument();
+    expect(baseElement).toBeDefined();
+  });
 
-    const apiUrl =
-      "https://api.blockcypher.com/v1/btc/main/addrs/15urYnyeJe3gwbGJ74wcX89Tz7ZtsFDVew/full";
+  it("should click the EUR Button", () => {
+    const { baseElement, getByText } = render(
+      <BtcAddressInfo address1="15urYnyeJe3gwbGJ74wcX89Tz7ZtsFDVew" />
+    );
+    fireEvent.click(getByText("EUR"));
+    expect(getByText("Viewing data in EUR currency!")).toBeInTheDocument();
+    expect(baseElement).toBeDefined();
+  });
 
-    const { result } = renderHook(() => useBtcAddressInfo({ apiUrl }));
-    console.log(result);
-    //Assert
-    expect(result.current.error).toEqual("Error fetching data");
+  it("should click the BTC Button", () => {
+    const { baseElement, getByText } = render(
+      <BtcAddressInfo address1="15urYnyeJe3gwbGJ74wcX89Tz7ZtsFDVew" />
+    );
+    fireEvent.click(getByText("BTC"));
+    expect(getByText("Viewing data in BTC currency!")).toBeInTheDocument();
+    expect(baseElement).toBeDefined();
   });
 });

@@ -1,13 +1,14 @@
-import { BtcAddressInfoInterface } from "@/types/types";
+import { BtcAddressInfo } from "@/types/types";
 import { useState, useEffect } from "react";
 
 interface UseBtcAddressInfoProps {
   apiUrl: string;
 }
 
-export const useBtcAddressInfo = ({ apiUrl }: UseBtcAddressInfoProps) => {
-  const [btcAddressInfo, setBtcAddressInfo] =
-    useState<BtcAddressInfoInterface | null>(null);
+const useBtcAddressInfo = ({ apiUrl }: UseBtcAddressInfoProps) => {
+  const [btcAddressInfo, setBtcAddressInfo] = useState<
+    BtcAddressInfo | undefined
+  >(undefined);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -17,15 +18,15 @@ export const useBtcAddressInfo = ({ apiUrl }: UseBtcAddressInfoProps) => {
       try {
         const response = await fetch(apiUrl);
         const data = await response.json();
-        // console.log('the data', data)
         if (data.error) {
           setError(data.error);
         }
         setBtcAddressInfo(data);
+        setIsLoading(false);
       } catch (e) {
         setError("Error fetching data");
+        setIsLoading(false);
       }
-      setIsLoading(false);
     };
 
     fetchBtcAddressInfo();
@@ -33,3 +34,5 @@ export const useBtcAddressInfo = ({ apiUrl }: UseBtcAddressInfoProps) => {
 
   return { btcAddressInfo, isLoading, error };
 };
+
+export { useBtcAddressInfo };

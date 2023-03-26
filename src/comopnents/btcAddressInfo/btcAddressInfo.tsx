@@ -28,11 +28,13 @@ export const BtcAddressInfo = (address: { address1: string }) => {
   return (
     <Box sx={{ p: 2 }}>
       <ButtonGroup
-        sx={{ mb: "30px" }}
+        sx={{ mb: "15px" }}
         variant="contained"
         aria-label="outlined primary button group"
+        data-testid="currencyButtons"
       >
         <Button
+          data-testid="USD"
           onClick={() => {
             handleOnclickCurrency("USD");
           }}
@@ -40,6 +42,7 @@ export const BtcAddressInfo = (address: { address1: string }) => {
           USD
         </Button>
         <Button
+          data-testid="EUR"
           onClick={() => {
             handleOnclickCurrency("EUR");
           }}
@@ -47,6 +50,7 @@ export const BtcAddressInfo = (address: { address1: string }) => {
           EUR
         </Button>
         <Button
+          data-testid="BTC"
           onClick={() => {
             handleOnclickCurrency("BTC");
           }}
@@ -54,6 +58,13 @@ export const BtcAddressInfo = (address: { address1: string }) => {
           BTC
         </Button>
       </ButtonGroup>
+      <Typography
+        variant="body1"
+        sx={{ mb: "15px" }}
+        data-testid="viewingCurrency"
+      >
+        Viewing data in {useCurrency} currency!
+      </Typography>
       <DisplayData btcAddressData={btcAddressInfo} currency={useCurrency} />
     </Box>
   );

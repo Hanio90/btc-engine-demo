@@ -1,9 +1,9 @@
 import { Box, Typography, Button } from "@mui/material";
 import { formatPriceData, useBtcPriceInfo } from "../../util/converter";
-import { BtcAddressInfoInterface } from "../../types/types";
+import { BtcAddressInfo } from "../../types/types";
 
 export const DisplayData = (data: {
-  btcAddressData: BtcAddressInfoInterface;
+  btcAddressData: BtcAddressInfo;
   currency: string;
 }) => {
   const { btcAddressData, currency } = data;
@@ -13,7 +13,7 @@ export const DisplayData = (data: {
   const usdRecievedBtcConverstion = total_received / btcPriceInfo.usd;
   const handleOnclick = (waletAddress: any, hash: any) => {};
   return (
-    <Box sx={{ p: 2 }}>
+    <Box>
       <Typography variant="h5">BTC Address Search Info</Typography>
       <Typography variant="body1">Confirmed Transactions: {n_tx}</Typography>
       {currency === "USD" && (
