@@ -1,8 +1,20 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+BTC Search Address Engine Documentation
+
+Introduction:
+The BTC Search Address Engine is a web application that allows users to search for Bitcoin addresses and retrieve their transaction data. This application is built using the React JavaScript library and utilizes the BlockCypher API to pull BTC address data and transaction data.
+
 ## Getting Started
 
-First, run the development server:
+First clone the repo
+`git clone https://github.com/Hanio90/btc-engine-demo.git`
+
+launch in IDE
+
+run `npm install`
+
+run the development server:
 
 ```bash
 npm run dev
@@ -14,25 +26,32 @@ pnpm dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+Example Addresses to use
+"15urYnyeJe3gwbGJ74wcX89Tz7ZtsFDVew"
+"12B5P9kxzSHxdCWGZB1BnPkPY3PHrgFXCT"
+"1M8rXiRwEUcqX7vkfYjE8wHopciCMFPW7k"
+"12GZ5YU1jeZzkGJJtqTpU9SQ26Aj8VdR25"
+"1F4JZYZr4rQhFeJ9P4N9ZL2cHe5cPsbnxw"
+"19ieTuZHjMKuyTMDpP3LKjnqWBTMbppmPy"
+"1E7smZtZ3pTxLMbny4kQ2gXosdYVcEh8Cz"
+"1Hq2SuE6KFLA3uGLT439vsZ2UcT9SQb5Dr"
+"1JVMpaWzLB1pnkwoQNqK4Z4EimQj5bCKj7"
+"1LtZUGSvUEM8HNZZVu8rqZVshTmQqrzvtc"
+"1N8TfvHg7JaNqWBVR7zDrHHyD363JzXF69"
+"1BxbqDsqgYcm3k6nYRLdjepW7Appoiw3sq"
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+To run the tests `run npm` test for coverage.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+Manually Testing the Project:
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Enter a valid Bitcoin address into the search bar.
+Click the "Search" button.
+Verify that the address details are displayed in the "Address Information" section.
+Scroll down to the "Transaction History" section.
+Verify that the transaction history for the address is displayed.
+Click on a transaction to view the transaction details.
+Verify that the transaction details are displayed in the "Transaction Details" section.
+You can subscribe to the block hash for any updates on that block, you can see it in the console withing the browser devtools
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Conclusion:
+The BTC Search Address Engine is a useful tool for users to search and retrieve transaction data for Bitcoin addresses. The project is open source and contributions are welcome. If you have any issues or suggestions, please create an issue on the project's Git repository.
