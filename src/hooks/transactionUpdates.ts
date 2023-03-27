@@ -6,7 +6,7 @@ export const getTransactionUpdates = (transaction: any) => {
       );
       let count = 0;
       ws.onmessage = function (event) {
-        console.log("The Event", event);
+        console.log("The Event on message:", event);
         const shortHash = transaction.block_hash.substring(0, 6) + "...";
         const total = transaction.total / 100000000;
         const addrs = transaction.addresses.join(", ");
@@ -25,6 +25,7 @@ export const getTransactionUpdates = (transaction: any) => {
       };
       ws.onopen = function (event) {
         //Will listen to all confirmed transactions withing the given block hash
+        console.log("The Event On Open:", event);
         ws.send(JSON.stringify({ event: "confirmed-tx" }));
       };
     } catch (e) {
