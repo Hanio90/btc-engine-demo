@@ -16,6 +16,7 @@ module.exports = {
     "_app.tsx",
     "_document.tsx",
     "index.ts",
+    "muiTheme.tsx",
   ],
 
   moduleNameMapper: {
