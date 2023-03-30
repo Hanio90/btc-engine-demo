@@ -14,7 +14,10 @@ export const useBtcPriceInfo = () => {
       setIsLoading(true);
       try {
         const response = await fetch(
-          "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd,eur"
+          "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd,eur",
+          {
+            mode: "no-cors",
+          }
         );
         const data = await response.json();
         setBtcPriceInfo({ usd: data.bitcoin.usd, eur: data.bitcoin.eur });
